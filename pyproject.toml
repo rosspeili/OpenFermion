@@ -74,6 +74,12 @@ ignore-missing-imports = [
     "tensorflow_docs",
     "tensorflow_docs.*",
 ]
+# pyscf (and similar) may be installed in CI via other env files; their
+# factory callables (e.g. scf.HF) are not valid annotation forms for Pyrefly.
+replace-imports-with-any = [
+    "pyscf",
+    "pyscf.*",
+]
 
 # Low-priority noise vs Cirq/sympy Expr typing and metaclass patterns that mypy
 # did not treat as errors in practice for this codebase.
