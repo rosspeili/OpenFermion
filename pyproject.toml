@@ -31,44 +31,56 @@ filterwarnings = [
     "ignore:Skipped assert_qasm_is_consistent_with_unitary because qiskit.*:UserWarning",
 ]
 
-[tool.mypy]
-implicit_optional = true
-ignore_errors = false
-
-[[tool.mypy.overrides]]
-module = "__main__"
-follow_imports = "silent"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = [
+[tool.pyrefly]
+# Migrated from [tool.mypy] via `pyrefly init`. Preset "legacy" disables a few
+# Pyrefly-only checks so the first pass stays closer to mypy behavior.
+preset = "legacy"
+# Match mypy defaults: do not aggressively check unannotated defs / infer returns.
+check-unannotated-defs = false
+infer-return-types = "never"
+# Respect leftover `# type: ignore` / `# mypy: ignore` comments during migration.
+permissive-ignores = true
+project-includes = ["src"]
+project-excludes = [
+    "**/docs/**",
+    "**/*.ipynb",
+    "**/__pycache__/**",
+    "**/.venv/**",
+    "**/venv/**",
+]
+search-path = ["src"]
+ignore-missing-imports = [
+    "__main__",
     "_pytest.*",
     "absl",
     "apiclient.*",
     "ase.*",
+    "cirq",
+    "cirq.*",
     "h5py",
+    "jax",
+    "jax.*",
     "numpy.*",
+    "pandas",
+    "pandas.*",
     "pubchempy",
     "pybtas",
+    "pyscf",
     "pyscf.*",
     "pytest.*",
     "scipy.*",
+    "sympy",
+    "sympy.*",
     "tensorflow_docs",
+    "tensorflow_docs.*",
 ]
-follow_imports = "silent"
-ignore_missing_imports = true
 
-[[tool.mypy.overrides]]
-module = "sympy.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "tensorflow_docs.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "deprecation"
-follow_untyped_imports = true
+# Low-priority noise vs Cirq/sympy Expr typing and metaclass patterns that mypy
+# did not treat as errors in practice for this codebase.
+[tool.pyrefly.errors]
+unsupported-operation = false
+invalid-inheritance = false
+bad-override = false
 
 [tool.uv.pip]
 universal = true
