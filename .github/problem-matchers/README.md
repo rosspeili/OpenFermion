@@ -28,11 +28,6 @@ made available under the terms of the MIT license.
 
 -   [`pytest.json`](https://github.com/liskin/gh-problem-matcher-wrap/blob/master/problem-matchers/pytest.json)
 
-The typecheck problem matcher matches Pyrefly's text and GitHub Actions output
-formats used by `check/typecheck`.
-
--   [`typecheck.json`](./typecheck.json)
-
 The actionlint problem matcher JSON file came from the
 [actionlint](https://github.com/rhysd/actionlint/blob/v1.7.7/docs/usage.md)
 documentation (copied on 2025-02-12, version 1.7.7). Actionlint is made

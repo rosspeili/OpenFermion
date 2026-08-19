@@ -49,14 +49,13 @@ project-excludes = [
     "**/venv/**",
 ]
 search-path = ["src"]
+# Optional or test-only imports without stubs; mirrors the old [tool.mypy.overrides].
 ignore-missing-imports = [
     "__main__",
     "_pytest.*",
     "absl",
     "apiclient.*",
     "ase.*",
-    "cirq",
-    "cirq.*",
     "h5py",
     "jax",
     "jax.*",
@@ -69,7 +68,6 @@ ignore-missing-imports = [
     "pyscf.*",
     "pytest.*",
     "scipy.*",
-    "sympy",
     "sympy.*",
     "tensorflow_docs",
     "tensorflow_docs.*",
@@ -81,8 +79,8 @@ replace-imports-with-any = [
     "pyscf.*",
 ]
 
-# Low-priority noise vs Cirq/sympy Expr typing and metaclass patterns that mypy
-# did not treat as errors in practice for this codebase.
+# Pyrefly-only checks that currently flag ~15 Cirq/sympy Expr and EigenGate override
+# issues mypy did not report on main; re-enable in a follow-up once those are fixed.
 [tool.pyrefly.errors]
 unsupported-operation = false
 invalid-inheritance = false

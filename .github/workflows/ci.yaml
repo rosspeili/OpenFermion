@@ -96,9 +96,7 @@ jobs:
           check/pylint -j 0
 
       - name: Check type declarations
-        run: |
-          echo '::add-matcher::.github/problem-matchers/typecheck.json'
-          check/typecheck --output-format github
+        run: check/typecheck --output-format github
 
   pytest:
     name: Unit tests
